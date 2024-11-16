@@ -27,3 +27,142 @@ dataSources:
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
       file: ./src/decentrad-factory.ts
+  - kind: ethereum
+    name: Decentrad
+    network: sepolia
+    source:
+      address: "0xF819c667b5E6aa01F93fcb52B962D6C8B35F1826"
+      abi: Decentrad
+      startBlock: 7089144
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdvAddedToAdvSpace
+        - AdvApproved
+        - AdvContentUpdated
+        - AdvPaymentUpdated
+        - AdvRejected
+        - AdvRestarted
+        - AdvSpaceCreated
+        - AdvSpaceStatusChanged
+        - AdvSpaceUpdated
+        - AdvStopped
+        - AdvertiserWithdraw
+        - Initialized
+        - ModeratorAdded
+        - ModeratorRemoved
+        - PublisherWithdraw
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - TokensDeposited
+      abis:
+        - name: Decentrad
+          file: ./abis/Decentrad.json
+      eventHandlers:
+        - event: AdvAddedToAdvSpace(bytes32,bytes32,address)
+          handler: handleAdvAddedToAdvSpace
+        - event: AdvApproved(bytes32,address)
+          handler: handleAdvApproved
+        - event: AdvContentUpdated(bytes32)
+          handler: handleAdvContentUpdated
+        - event: AdvPaymentUpdated(bytes32,uint256,uint256)
+          handler: handleAdvPaymentUpdated
+        - event: AdvRejected(bytes32,address)
+          handler: handleAdvRejected
+        - event: AdvRestarted(bytes32,address)
+          handler: handleAdvRestarted
+        - event: AdvSpaceCreated(bytes32,bytes32,string)
+          handler: handleAdvSpaceCreated
+        - event: AdvSpaceStatusChanged(bytes32,bool)
+          handler: handleAdvSpaceStatusChanged
+        - event: AdvSpaceUpdated(bytes32)
+          handler: handleAdvSpaceUpdated
+        - event: AdvStopped(bytes32,address)
+          handler: handleAdvStopped
+        - event: AdvertiserWithdraw(bytes32,uint256)
+          handler: handleAdvertiserWithdraw
+        - event: Initialized(uint64)
+          handler: handleInitialized
+        - event: ModeratorAdded(address[])
+          handler: handleModeratorAdded
+        - event: ModeratorRemoved(address[])
+          handler: handleModeratorRemoved
+        - event: PublisherWithdraw(bytes32[],uint256)
+          handler: handlePublisherWithdraw
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: TokensDeposited(bytes32,uint256)
+          handler: handleTokensDeposited
+      file: ./src/decentrad.ts
+templates:
+  - name: Decentrad
+    kind: ethereum/contract
+    network: sepolia
+    source:
+      abi: Decentrad
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/decentrad.ts
+      entities:
+        - AdvAddedToAdvSpace
+        - AdvApproved
+        - AdvContentUpdated
+        - AdvPaymentUpdated
+        - AdvRejected
+        - AdvRestarted
+        - AdvSpaceCreated
+        - AdvSpaceStatusChanged
+        - AdvSpaceUpdated
+        - AdvStopped
+        - AdvertiserWithdraw
+        - Initialized
+        - ModeratorAdded
+        - ModeratorRemoved
+        - PublisherWithdraw
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - TokensDeposited
+      abis:
+        - name: Decentrad
+          file: ./abis/Decentrad.json
+      eventHandlers:
+        - event: AdvAddedToAdvSpace(bytes32,bytes32,address)
+          handler: handleAdvAddedToAdvSpace
+        - event: AdvApproved(bytes32,address)
+          handler: handleAdvApproved
+        - event: AdvContentUpdated(bytes32)
+          handler: handleAdvContentUpdated
+        - event: AdvPaymentUpdated(bytes32,uint256,uint256)
+          handler: handleAdvPaymentUpdated
+        - event: AdvRejected(bytes32,address)
+          handler: handleAdvRejected
+        - event: AdvRestarted(bytes32,address)
+          handler: handleAdvRestarted
+        - event: AdvSpaceCreated(bytes32,bytes32,string)
+          handler: handleAdvSpaceCreated
+        - event: AdvSpaceStatusChanged(bytes32,bool)
+          handler: handleAdvSpaceStatusChanged
+        - event: AdvSpaceUpdated(bytes32)
+          handler: handleAdvSpaceUpdated
+        - event: AdvStopped(bytes32,address)
+          handler: handleAdvStopped
+        - event: AdvertiserWithdraw(bytes32,uint256)
+          handler: handleAdvertiserWithdraw
+        - event: ModeratorAdded(address[])
+          handler: handleModeratorAdded
+        - event: ModeratorRemoved(address[])
+          handler: handleModeratorRemoved
+        - event: PublisherWithdraw(bytes32[],uint256)
+          handler: handlePublisherWithdraw
+        - event: TokensDeposited(bytes32,uint256)
+          handler: handleTokensDeposited

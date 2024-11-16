@@ -3,6 +3,7 @@ import {
   OwnershipTransferred as OwnershipTransferredEvent
 } from "../generated/DecentradFactory/DecentradFactory"
 import { CloneCreated, OwnershipTransferred } from "../generated/schema"
+import { Decentrad } from "../generated/templates"
 
 export function handleCloneCreated(event: CloneCreatedEvent): void {
   let entity = new CloneCreated(
@@ -17,6 +18,8 @@ export function handleCloneCreated(event: CloneCreatedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  Decentrad.create(event.params.cloneAddress)
 }
 
 export function handleOwnershipTransferred(
