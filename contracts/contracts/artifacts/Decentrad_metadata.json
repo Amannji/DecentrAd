@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.26+commit.8a97fa7a"
+		"version": "0.8.28+commit.7893614a"
 	},
 	"language": "Solidity",
 	"output": {
@@ -110,19 +110,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advSpaceId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address",
 						"name": "_advertiser",
 						"type": "address"
@@ -135,13 +135,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address",
 						"name": "_approvedBy",
 						"type": "address"
@@ -154,7 +154,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
@@ -167,19 +167,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "_prevPayRate",
 						"type": "uint256"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "_newPayRate",
 						"type": "uint256"
@@ -192,13 +192,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address",
 						"name": "_rejectedBy",
 						"type": "address"
@@ -211,13 +211,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address",
 						"name": "_restartedBy",
 						"type": "address"
@@ -230,19 +230,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advSpaceId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_size",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "string",
 						"name": "_pageURL",
 						"type": "string"
@@ -255,13 +255,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advSpaceId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bool",
 						"name": "_isEnabled",
 						"type": "bool"
@@ -274,7 +274,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advSpaceId",
 						"type": "bytes32"
@@ -287,13 +287,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address",
 						"name": "_stoppedBy",
 						"type": "address"
@@ -306,13 +306,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "_amount",
 						"type": "uint256"
@@ -338,7 +338,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address[]",
 						"name": "_modAddress",
 						"type": "address[]"
@@ -351,7 +351,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "address[]",
 						"name": "_modAddress",
 						"type": "address[]"
@@ -364,13 +364,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32[]",
 						"name": "_advIds",
 						"type": "bytes32[]"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "_amount",
 						"type": "uint256"
@@ -458,13 +458,13 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "bytes32",
 						"name": "_advId",
 						"type": "bytes32"
 					},
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint256",
 						"name": "_amount",
 						"type": "uint256"
@@ -1838,7 +1838,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Decentrad.sol": "Decentrad"
+			"Decentrad.sol": "Decentrad"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -1847,7 +1847,7 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 200
+			"runs": 100
 		},
 		"remappings": []
 	},
@@ -2004,7 +2004,7 @@
 				"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
 			]
 		},
-		"contracts/Decentrad.sol": {
+		"Decentrad.sol": {
 			"keccak256": "0x97ff56382132547c3b6c2196ebd2dcf0c6064e1871fcbe6ee3f93ab2cd8ae8c3",
 			"license": "Unlicense",
 			"urls": [
@@ -2012,20 +2012,20 @@
 				"dweb:/ipfs/QmRpJbEnNroDmcFujaGHgMa5XE1NaD3iPGCgcNuTsmbDQj"
 			]
 		},
-		"contracts/DecentradFactory.sol": {
-			"keccak256": "0x94311b9884083059c3b4bbfbade50682fa1895fb6a8defaa99d4695b4f5bb68d",
+		"DecentradFactory.sol": {
+			"keccak256": "0x85689b95a49b0962a0158242cb87ec4378536634bd2c7a741ad6dcd46f48794b",
 			"license": "Unlicense",
 			"urls": [
-				"bzz-raw://b8a34537b3d3b33f06a58435b5f303c40c48c06b0ffc878a040634e05d1ea53c",
-				"dweb:/ipfs/Qmet7fbFKhMqQY3VVFWG6uRQFqAJXheLRjXFGGPaARETwQ"
+				"bzz-raw://967555c388256bfef07e39126e57392fb5f1308accc0a4f076a8c2c4b98cd8a9",
+				"dweb:/ipfs/QmU3ugeVA3YYVErFij9o3nFQaAsmmY1aSoXXAMZChyVy9N"
 			]
 		},
-		"contracts/IDecentrad.sol": {
-			"keccak256": "0x901b3d829499eb445d3865e949a6903fba2971299126cbc10d409b351146c851",
+		"IDecentrad.sol": {
+			"keccak256": "0x96833ee6cafcdd4020b26b525a0a5e9ec57c3aa834764ce33e0fa7f7d31946f1",
 			"license": "Unlicense",
 			"urls": [
-				"bzz-raw://c82189733236b588b8cc5783696e84cb807748fa44b85a8503b2c893a399b77c",
-				"dweb:/ipfs/QmUBuAo3PG9yUpyfSP2DzYiGXWpX7E7z4CWKLwFjMUEkXF"
+				"bzz-raw://59b0913c7b568945a971f658ba943866c1ffc476003be583e4ff5f765ad5949a",
+				"dweb:/ipfs/QmTj7nRd1EdTezoQRbJGxCiTWLYutZP6sVeBEzGZoCkuPD"
 			]
 		}
 	},

@@ -1,8 +1,0 @@
-{
-  "sepolia": {
-    "DecentradFactory": {
-      "address": "0x808ADaA716C41F69Fc99ebE11c03fe7a8a9683e1",
-      "startBlock": 7087387
-    }
-  }
-}

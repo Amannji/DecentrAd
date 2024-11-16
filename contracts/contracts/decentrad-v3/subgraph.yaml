@@ -1,0 +1,29 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DecentradFactory
+    network: sepolia
+    source:
+      address: "0x0b2f836957ED4028C5A1cdFAadDC1232216655f5"
+      abi: DecentradFactory
+      startBlock: 7089150
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CloneCreated
+        - OwnershipTransferred
+      abis:
+        - name: DecentradFactory
+          file: ./abis/DecentradFactory.json
+      eventHandlers:
+        - event: CloneCreated(uint256,string,address)
+          handler: handleCloneCreated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/decentrad-factory.ts
