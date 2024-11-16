@@ -805,7 +805,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"DecentradFactory.sol": "DecentradFactory"
+			"contracts/DecentradFactory.sol": "DecentradFactory"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -851,7 +851,7 @@
 				"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
 			]
 		},
-		"DecentradFactory.sol": {
+		"contracts/DecentradFactory.sol": {
 			"keccak256": "0x94311b9884083059c3b4bbfbade50682fa1895fb6a8defaa99d4695b4f5bb68d",
 			"license": "Unlicense",
 			"urls": [
@@ -859,7 +859,7 @@
 				"dweb:/ipfs/Qmet7fbFKhMqQY3VVFWG6uRQFqAJXheLRjXFGGPaARETwQ"
 			]
 		},
-		"IDecentrad.sol": {
+		"contracts/IDecentrad.sol": {
 			"keccak256": "0x901b3d829499eb445d3865e949a6903fba2971299126cbc10d409b351146c851",
 			"license": "Unlicense",
 			"urls": [
