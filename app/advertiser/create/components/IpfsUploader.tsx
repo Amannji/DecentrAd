@@ -5,6 +5,7 @@ import { create } from "ipfs-http-client";
 import { useDropzone } from "react-dropzone";
 import { File, Upload } from "lucide-react";
 import axios from "axios";
+import { ThirdwebStorage } from "@thirdweb-dev/storage";
 
 // Initialize IPFS client
 // Note: Replace with your own IPFS node address if you're not using the default
