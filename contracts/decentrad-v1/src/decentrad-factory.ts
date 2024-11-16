@@ -1,4 +1,4 @@
-import { OwnershipTransferred as OwnershipTransferredEvent } from "../generated/Decentrad/Decentrad"
+import { OwnershipTransferred as OwnershipTransferredEvent } from "../generated/DecentradFactory/DecentradFactory"
 import { OwnershipTransferred } from "../generated/schema"
 
 export function handleOwnershipTransferred(

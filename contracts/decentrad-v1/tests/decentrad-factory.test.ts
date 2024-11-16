@@ -8,9 +8,9 @@ import {
 } from "matchstick-as/assembly/index"
 import { Address } from "@graphprotocol/graph-ts"
 import { OwnershipTransferred } from "../generated/schema"
-import { OwnershipTransferred as OwnershipTransferredEvent } from "../generated/Decentrad/Decentrad"
-import { handleOwnershipTransferred } from "../src/decentrad"
-import { createOwnershipTransferredEvent } from "./decentrad-utils"
+import { OwnershipTransferred as OwnershipTransferredEvent } from "../generated/DecentradFactory/DecentradFactory"
+import { handleOwnershipTransferred } from "../src/decentrad-factory"
+import { createOwnershipTransferredEvent } from "./decentrad-factory-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

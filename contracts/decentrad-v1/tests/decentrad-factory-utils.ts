@@ -1,6 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum, Address } from "@graphprotocol/graph-ts"
-import { OwnershipTransferred } from "../generated/Decentrad/Decentrad"
+import { OwnershipTransferred } from "../generated/DecentradFactory/DecentradFactory"
 
 export function createOwnershipTransferredEvent(
   previousOwner: Address,

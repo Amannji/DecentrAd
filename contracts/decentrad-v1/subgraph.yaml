@@ -5,11 +5,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Decentrad
+    name: DecentradFactory
     network: sepolia
     source:
       address: "0x808ADaA716C41F69Fc99ebE11c03fe7a8a9683e1"
-      abi: Decentrad
+      abi: DecentradFactory
       startBlock: 7087387
     mapping:
       kind: ethereum/events
@@ -18,9 +18,9 @@ dataSources:
       entities:
         - OwnershipTransferred
       abis:
-        - name: Decentrad
-          file: ./abis/Decentrad.json
+        - name: DecentradFactory
+          file: ./abis/DecentradFactory.json
       eventHandlers:
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-      file: ./src/decentrad.ts
+      file: ./src/decentrad-factory.ts
