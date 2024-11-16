@@ -75,6 +75,9 @@ contract DecentradFactory is Ownable {
      */
     error PubCloneContractExists(address publisherAddress, address cloneAddress);
 
+
+    event CloneCreated(uint256 date, string message, address cloneAddress);
+
     /**
      * @dev Throws if the _implementation is invalid address.
      * @param _implementation contract address of the deployed publisher contract.
@@ -160,6 +163,7 @@ contract DecentradFactory is Ownable {
         publisherClones[msg.sender].push(_pubClone);
         _cloneIndex[pubCloneContract] = publisherClones[msg.sender].length - 1;
         allPublisherClones.push(_pubClone);
+        emit CloneCreated(block.timestamp, "Clone created", pubCloneContract);
     }
 
     /**
