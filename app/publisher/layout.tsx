@@ -5,5 +5,5 @@ interface PublisherLayoutProps {
 }
 
 export default function PublisherLayout({ children }: PublisherLayoutProps) {
-  return <div className="min-h-screen bg-gray-50">{children}</div>;
+  return <div className="min-h-screen bg-pink-100">{children}</div>;
 }
