@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { abi as publisherContractAbi } from "../../../../abi/DecentradFactory.json";
 import { abi as advertiserContractAbi } from "../../../../abi/Decentrad.json";
 import { useAccount } from "wagmi";
+import { toBytes } from "viem";
 
 interface PublisherData {
   siteURL: string;
@@ -101,7 +102,7 @@ export default function UploadingCreatives({
       setCurrentAdSpaceIndex((prev) => prev - 1);
       setFormData({
         ...formData,
-        advSpaceId: adSpaces[currentAdSpaceIndex - 1],
+        advSpaceId: adSpaces[currentAdSpaceIndex - 1].size,
       });
     }
   };
@@ -111,7 +112,7 @@ export default function UploadingCreatives({
       setCurrentAdSpaceIndex((prev) => prev + 1);
       setFormData({
         ...formData,
-        advSpaceId: adSpaces[currentAdSpaceIndex + 1],
+        advSpaceId: adSpaces[currentAdSpaceIndex + 1].size,
       });
     }
   };
@@ -315,7 +316,15 @@ export default function UploadingCreatives({
           </h1>
           <button
             className="px-6 py-2 text-white font-bold bg-blue-600 rounded-md hover:bg-blue-700"
-            onClick={() => setIsStep2(true)}
+            onClick={() => {
+              if (adSpaces.length > 0 && !formData.advSpaceId) {
+                setFormData({
+                  ...formData,
+                  advSpaceId: adSpaces[0].size,
+                });
+              }
+              setIsStep2(true);
+            }}
           >
             Next
           </button>

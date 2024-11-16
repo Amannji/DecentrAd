@@ -2,6 +2,9 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAccount, useBalance } from "wagmi";
+import { ConnectWalletClient } from "../../../config/config";
+import { abi as advertiserContractAbi } from "../../../../abi/Decentrad.json";
+import { parseEther, parseGwei, formatEther, toBytes } from "viem";
 
 export default function SettingPaymentRate({
   formData,
@@ -13,8 +16,30 @@ export default function SettingPaymentRate({
   const router = useRouter();
   const { address } = useAccount();
   const { data: balance } = useBalance({ address });
-  const [depositAmount, setDepositAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState(parseEther("0"));
 
+  const contractAddress = "0x1A11eC2Cc811e610eBAa8975daA0A8c1a080d2d0";
+  const contractAbi = advertiserContractAbi;
+
+  const handleCreate = async () => {
+    if (!address) return;
+
+    await ConnectWalletClient().writeContract({
+      address: contractAddress,
+      abi: contractAbi,
+      functionName: "createAdvAndAddToAdvSpace",
+      args: [
+        toBytes(formData.advId),
+        formData.advTitle,
+        formData.advText,
+        formData.ipfsHashes,
+        formData.paymentRatePerSec,
+        formData.depositAmount,
+        formData.advLink,
+      ],
+      account: address,
+    });
+  };
   return (
     <div className="min-h-screen bg-blue-200">
       <div className="container mx-auto p-8">
@@ -55,8 +80,8 @@ export default function SettingPaymentRate({
               <input
                 type="number"
                 id="depositAmount"
-                value={depositAmount}
-                onChange={(e) => setDepositAmount(Number(e.target.value))}
+                value={formatEther(depositAmount)}
+                onChange={(e) => setDepositAmount(parseEther(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter deposit amount"
                 step="0.01"
@@ -66,12 +91,14 @@ export default function SettingPaymentRate({
             <div className="bg-gray-50 p-4 rounded-lg space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Deposit Fee (2%):</span>
-                <span>{Number(depositAmount * 0.02).toFixed(4)} ETH</span>
+                <span>
+                  {(Number(formatEther(depositAmount)) * 0.02).toFixed(4)} ETH
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Amount for Ad Spend:</span>
                 <span>
-                  {(depositAmount - Number(depositAmount * 0.02)).toFixed(4)}
+                  {(Number(formatEther(depositAmount)) * 0.98).toFixed(4)}
                   ETH
                 </span>
               </div>
@@ -91,6 +118,13 @@ export default function SettingPaymentRate({
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                   placeholder="Enter rate"
                   step="0.000001"
+                  value={formData.paymentRatePerSec}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      paymentRatePerSec: parseEther(e.target.value),
+                    })
+                  }
                 />
                 <select className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500">
                   <option value="second">Per Second</option>
@@ -113,7 +147,10 @@ export default function SettingPaymentRate({
           <h1>
             <span className="text-blue-600 font-bold">Advertiser </span> Step 2
           </h1>
-          <button className="px-6 py-2 text-white font-bold bg-blue-600 rounded-md hover:bg-blue-700">
+          <button
+            className="px-6 py-2 text-white font-bold bg-blue-600 rounded-md hover:bg-blue-700"
+            onClick={handleCreate}
+          >
             Create
           </button>
         </div>
