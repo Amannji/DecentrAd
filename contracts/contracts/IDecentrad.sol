@@ -16,77 +16,77 @@ interface IDecentrad {
     /**
      * @dev Emitted when adv space is created with (`_advSpaceId`), of given (`_size`) and (`_pageURL`)
      */
-    event AdvSpaceCreated(bytes32 indexed _advSpaceId, bytes32 indexed _size, string indexed _pageURL);
+    event AdvSpaceCreated(bytes32  _advSpaceId, bytes32  _size, string  _pageURL);
     
     /**
      * @dev Emitted when adv space of (`_advSpaceId`) is updated
      */
-    event AdvSpaceUpdated(bytes32 indexed _advSpaceId);
+    event AdvSpaceUpdated(bytes32  _advSpaceId);
 
     /**
      * @dev Emitted when adv space of (`_advSpaceId`) is enabled or disabled with bool (`_isEnabled`)
      */
-    event AdvSpaceStatusChanged(bytes32 indexed _advSpaceId, bool indexed _isEnabled);
+    event AdvSpaceStatusChanged(bytes32  _advSpaceId, bool  _isEnabled);
 
     /**
      * @dev Emitted when adv of ID (`_advId) is added to space of (`_advSpaceId`) by (`_advertiser`)
      */
-    event AdvAddedToAdvSpace(bytes32 indexed _advSpaceId, bytes32 indexed _advId, address indexed _advertiser);
+    event AdvAddedToAdvSpace(bytes32  _advSpaceId, bytes32  _advId, address  _advertiser);
 
     /**
      * @dev Emitted when adv of ID (`_advId) is approved by moderator or publisher of address (`_approvedBy`)
      */
-    event AdvApproved(bytes32 indexed _advId, address indexed _approvedBy);
+    event AdvApproved(bytes32  _advId, address  _approvedBy);
 
     /**
      * @dev Emitted when adv of ID (`_advId) is rejected by moderator or publisher of address (`_rejectedBy`)
      */
-    event AdvRejected(bytes32 indexed _advId, address indexed _rejectedBy);
+    event AdvRejected(bytes32  _advId, address  _rejectedBy);
     
     /**
      * @dev Emitted when adv of ID (`_advId) is stopped by moderator/publisher/advertiser of address (`_stoppedBy`)
      */
-    event AdvStopped(bytes32 indexed _advId, address indexed _stoppedBy);
+    event AdvStopped(bytes32  _advId, address  _stoppedBy);
 
     /**
      * @dev Emitted when adv of ID (`_advId) is restarted by moderator/publisher/advertiser of address (`_restartedBy`)
      */
-    event AdvRestarted(bytes32 indexed _advId, address indexed _restartedBy);
+    event AdvRestarted(bytes32  _advId, address  _restartedBy);
 
     /**
      * @dev Emitted when content of adv of ID (`_advId) is updated
      */    
-    event AdvContentUpdated(bytes32 indexed _advId);
+    event AdvContentUpdated(bytes32  _advId);
 
     /**
      * @dev Emitted when payment rate of adv of ID (`_advId) is updated from (`_prevPayRate`) to (`_newPayRate`)
      */  
-    event AdvPaymentUpdated(bytes32 indexed _advId, uint256 indexed _prevPayRate, uint256 indexed _newPayRate);
+    event AdvPaymentUpdated(bytes32  _advId, uint256  _prevPayRate, uint256  _newPayRate);
 
     /**
      * @dev Emitted when (`_amount`) of ERC20 tokens are deposited to adv of ID (`_advId)
      */  
-    event TokensDeposited(bytes32 indexed _advId, uint256 indexed _amount);
+    event TokensDeposited(bytes32  _advId, uint256  _amount);
 
     /**
      * @dev Emitted when publisher withdraws balance of ads of ids (`_advIds`) with total (`_amount`) of tokens
      */  
-    event PublisherWithdraw(bytes32[] indexed _advIds, uint256 indexed _amount);
+    event PublisherWithdraw(bytes32[]  _advIds, uint256  _amount);
 
     /**
      * @dev Emitted when advertiser withdraws balance of adv of id (`_advId`) with (`_amount`) of tokens
      */  
-    event AdvertiserWithdraw(bytes32 indexed _advId, uint256 indexed _amount);
+    event AdvertiserWithdraw(bytes32  _advId, uint256  _amount);
     
     /**
      * @dev Emitted when moderators with (`_modAddress`) are added 
      */  
-    event ModeratorAdded(address[] indexed _modAddress);
+    event ModeratorAdded(address[]  _modAddress);
 
     /**
      * @dev Emitted when moderators with (`_modAddress`) are removed 
      */  
-    event ModeratorRemoved(address[] indexed _modAddress);
+    event ModeratorRemoved(address[]  _modAddress);
 
     /**
      * @dev It is called by PublisherFactory contract with new publisher contract is to created
