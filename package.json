@@ -9,17 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-=======
-    "@dynamic-labs/ethereum": "^3.6.3",
-    "@dynamic-labs/sdk-react-core": "^3.6.3",
-    "@dynamic-labs/wagmi-connector": "^3.6.3",
-    "@tanstack/react-query": "^5.60.4",
-    "bignumber.js": "^9.1.2",
-    "ethers": "^6.13.4",
->>>>>>> ee14446d943ae2d18811f53e87d88587b02427ab
     "next": "15.0.3",
     "@dynamic-labs/sdk-react-core": "*",
     "viem": "*",
