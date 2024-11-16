@@ -5,6 +5,7 @@ import { abi as publisherAbi } from "../../abi/DecentradFactory.json";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
+import { CircleArrowLeft } from "lucide-react";
 
 interface PublisherData {
   siteURL: string;
@@ -40,9 +41,15 @@ export default function Page() {
 
   return (
     <div className="p-8 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-center mt-8">
-        Publisher Dashboard
-      </h1>
+      <div className="flex items-center justify-center mb-8 mt-8 relative">
+        <button
+          onClick={() => router.push("/")}
+          className="absolute left-0 text-gray-600 hover:text-gray-800"
+        >
+          <CircleArrowLeft width={50} height={35} />
+        </button>
+        <h1 className="text-3xl font-bold">Publisher Dashboard</h1>
+      </div>
 
       <div className="bg-white rounded-lg shadow-lg p-6">
         <div className="grid grid-cols-2 gap-8">
@@ -75,10 +82,20 @@ export default function Page() {
             </div>
 
             <div className="space-y-4">
-              <button className="w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-400">
+              <button
+                className="w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-400"
+                onClick={() =>
+                  router.push(
+                    `/publisher/create?type=adspace&contract=${publisherData[0]?.cloneAddress}`
+                  )
+                }
+              >
                 Create Another Ad Space
               </button>
-              <button className="w-full text-pink-600 py-2 px-4 rounded-md border border-pink-600 hover:text-pink-400 hover:border-pink-400">
+              <button
+                className="w-full text-pink-600 py-2 px-4 rounded-md border border-pink-600 hover:text-pink-400 hover:border-pink-400"
+                onClick={() => router.push("/publisher/create")}
+              >
                 Create Another Publisher Contract
               </button>
             </div>

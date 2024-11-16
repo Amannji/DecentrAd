@@ -1,18 +1,30 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ConnectPublicClient } from "../../../config/config";
+import {
+  ConnectPublicClient,
+  ConnectWalletClient,
+} from "../../../config/config";
 import { abi as publisherAbi } from "../../../../abi/DecentradFactory.json";
+import { abi as someAbi } from "../../../../abi/Decentrad.json";
 // import { useDynamicContext } from "@dynamic-labs/sdk-react";
 import { useAccount } from "wagmi";
 
-export default function CreateAdSpace() {
+export default function CreateAdSpace({
+  contractAddress,
+}: {
+  contractAddress: string;
+}) {
   const router = useRouter();
-  const [clones, setClones] = useState([]);
+  const [clones, setClones] = useState<
+    Array<{ siteURL: string; cloneAddress: string }>
+  >([]);
   // const { primaryWallet } = useDynamicContext();
   // const address = primaryWallet?.address;
   const { address } = useAccount();
 
   const publicClient = ConnectPublicClient();
+  const walletClient = ConnectWalletClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     websiteUrl: "",
@@ -47,19 +59,31 @@ export default function CreateAdSpace() {
     setClones(clones as []);
   };
 
-  const handleCancel = () => {
-    router.back();
-  };
-
-  const handleSave = () => {
-    // console.log(formData);
+  const handleSave = async () => {
+    setIsLoading(true);
+    const hash = await walletClient.writeContract({
+      address: contractAddress as `0x${string}`,
+      abi: someAbi,
+      functionName: "createAdvSpace",
+      args: [
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        formData.websiteUrl,
+        0,
+        formData.description,
+      ],
+      account: address as `0x${string}`,
+    });
+    const tx = await publicClient.waitForTransactionReceipt({ hash });
+    console.log(tx);
+    setIsLoading(false);
+    router.push("/publisher");
   };
 
   useEffect(() => {
     if (address) {
       getAllPubClonesByPublisherAddress();
     }
-  }, [address]);
+  }, []);
 
   return (
     <div className="container mx-auto p-8">
@@ -103,10 +127,9 @@ export default function CreateAdSpace() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
               required
             >
-              <option value="">Select a website URL</option>
               {clones?.map((clone, index) => (
-                <option key={index} value={clone}>
-                  {clone}
+                <option key={index} value={clone.siteURL}>
+                  {clone.siteURL}
                 </option>
               ))}
             </select>
@@ -122,11 +145,11 @@ export default function CreateAdSpace() {
             <input
               type="text"
               id="contractAddress"
-              value={formData.contractAddress}
-              onChange={handleChange}
+              value={contractAddress}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Enter contract address"
               required
+              disabled
             />
           </div>
 
@@ -171,7 +194,7 @@ export default function CreateAdSpace() {
       {/* Action Buttons */}
       <div className="bg-white p-4 rounded-lg flex justify-between items-center">
         <button
-          onClick={handleCancel}
+          onClick={() => router.push("/publisher")}
           className="px-6 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200"
         >
           Cancel
@@ -180,6 +203,20 @@ export default function CreateAdSpace() {
           <span className="text-pink-600 font-bold">Publisher </span> Create Ad
           Space
         </h1>
+        {isLoading && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg w-[30%] mx-auto">
+              <div className="mt-4 border-2 border-pink-500 p-4 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <div className="animate-spin rounded-full h-8 w-8 border-4 border-pink-500 border-t-transparent"></div>
+                  <p className="text-sm font-medium">
+                    Transaction in progress...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         <button
           onClick={handleSave}
           className="px-6 py-2 text-white font-bold bg-pink-600 rounded-md hover:bg-pink-400"

@@ -1,9 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Page() {
   const router = useRouter();
-  // Add navigation handler
+
+  const [selectedAd, setSelectedAd] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewAd = (ad) => {
+    setSelectedAd(ad);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-blue-200">
@@ -19,15 +27,13 @@ export default function Page() {
 
         <div className="bg-white p-6 rounded-lg shadow-sm mb-4">
           <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-sm text-gray-600">Contract Address</p>
-                <p className="font-mono">0x1234...5678</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Website URL</p>
-                <p>example.com</p>
-              </div>
+            <div className="flex justify-end">
+              <button
+                className="px-6 py-3 text-white font-bold bg-blue-600 rounded-md hover:bg-blue-700"
+                onClick={() => router.push("advertiser/create")}
+              >
+                Create New Ad
+              </button>
             </div>
 
             <div>
@@ -42,7 +48,18 @@ export default function Page() {
                   <p className="text-xs text-gray-500 mb-3">
                     URL: summer-sale.example.com
                   </p>
-                  <button className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50">
+                  <button
+                    className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50"
+                    onClick={() =>
+                      handleViewAd({
+                        title: "Summer Sale Campaign",
+                        description:
+                          "Get 50% off on all summer items! Limited time offer.",
+                        url: "summer-sale.example.com",
+                        status: "active",
+                      })
+                    }
+                  >
                     View Ad
                   </button>
                 </div>
@@ -55,7 +72,18 @@ export default function Page() {
                   <p className="text-xs text-gray-500 mb-3">
                     URL: new-collection.example.com
                   </p>
-                  <button className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50">
+                  <button
+                    className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50"
+                    onClick={() =>
+                      handleViewAd({
+                        title: "New Collection Launch",
+                        description:
+                          "Discover our latest autumn collection now available!",
+                        url: "new-collection.example.com",
+                        status: "active",
+                      })
+                    }
+                  >
                     View Ad
                   </button>
                 </div>
@@ -74,7 +102,18 @@ export default function Page() {
                   <p className="text-xs text-gray-500 mb-3">
                     URL: spring-sale.example.com
                   </p>
-                  <button className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50">
+                  <button
+                    className="w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50"
+                    onClick={() =>
+                      handleViewAd({
+                        title: "Spring Collection",
+                        description:
+                          "Spring fashion essentials at amazing prices!",
+                        url: "spring-sale.example.com",
+                        status: "inactive",
+                      })
+                    }
+                  >
                     View Ad
                   </button>
                 </div>
@@ -82,16 +121,46 @@ export default function Page() {
             </div>
           </div>
         </div>
-
-        <div className="flex justify-center">
-          <button
-            className="px-6 py-3 text-white font-bold bg-blue-600 rounded-md hover:bg-blue-700"
-            onClick={() => router.push("advertiser/create")}
-          >
-            Create New Ad
-          </button>
-        </div>
       </div>
+
+      {/* Ad Details Modal */}
+      {isModalOpen && selectedAd && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg p-6 max-w-lg w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">{selectedAd.title}</h2>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-600">Description</p>
+                <p>{selectedAd.description}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600">URL</p>
+                <p className="font-mono">{selectedAd.url}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600">Status</p>
+                <p
+                  className={`capitalize ${
+                    selectedAd.status === "active"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {selectedAd.status}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
