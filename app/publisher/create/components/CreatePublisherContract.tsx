@@ -1,19 +1,24 @@
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { ConnectWalletClient, ConnectPublicClient } from "../../config/config";
-import { abi as publisherAbi } from "../../../abi/DecentradFactory.json";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  ConnectWalletClient,
+  ConnectPublicClient,
+} from "../../../config/config";
+import { abi as publisherAbi } from "../../../../abi/DecentradFactory.json";
 
-export default function CreatePublisherContract() {
+export default function CreatePublisherContract({
+  setIsStep2,
+  setContractAddress,
+}: {
+  setIsStep2: (value: boolean) => void;
+  setContractAddress: (value: string) => void;
+}) {
   const router = useRouter();
   const walletClient = ConnectWalletClient();
   const publicClient = ConnectPublicClient();
 
   const publisherContract = "0x808adaa716c41f69fc99ebe11c03fe7a8a9683e1";
   const publisherContractAbi = publisherAbi;
-
-  const handleBack = () => {
-    router.push("/");
-  };
 
   const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState("");
@@ -31,7 +36,10 @@ export default function CreatePublisherContract() {
         account: account[0],
       });
       const tx = await publicClient.waitForTransactionReceipt({ hash });
+
+      setContractAddress(tx.contractAddress as string);
       console.log(tx);
+      setIsStep2(true);
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +122,7 @@ export default function CreatePublisherContract() {
 
         <div className="bg-white p-4 rounded-lg flex justify-between items-center">
           <button
-            onClick={handleBack}
+            onClick={() => router.back()}
             className="px-6 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200"
           >
             Back
