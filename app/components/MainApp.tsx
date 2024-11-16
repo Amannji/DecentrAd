@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 // import { useEnsName } from "wagmi";
 // import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
@@ -8,13 +8,13 @@ export default function MainApp() {
   //   const { data: ensName } = useEnsName({
   //     address: primaryWallet?.address as `0x${string}`,
   //   });
-
+  const router = useRouter();
   return (
     <>
       {/* Main content with two containers */}
       <div className="flex flex-col items-center">
         <h1 className="text-4xl font-bold mb-12 text-center">DecentrAd</h1>
-        <div className="flex gap-8 w-full p-12 rounded-xl">
+        <div className="flex flex-wrap gap-8 w-full p-12 rounded-xl">
           {/* Publishers Container */}
           <div className="flex-1 p-8 border rounded-lg shadow-lg bg-white/80 backdrop-blur-sm">
             <h2 className="text-2xl font-bold mb-4">For Publishers</h2>
@@ -24,8 +24,11 @@ export default function MainApp() {
               <li>Control your ad space</li>
               <li>Track performance in real-time</li>
             </ul>
-            <button className="w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-              Become a Publisher
+            <button
+              onClick={() => router.push("/publisher")}
+              className="w-full py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-400 transition-colors"
+            >
+              Become a publisher
             </button>
           </div>
 
@@ -38,8 +41,11 @@ export default function MainApp() {
               <li>Transparent pricing</li>
               <li>Detailed analytics dashboard</li>
             </ul>
-            <button className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              Become an Advertiser
+            <button
+              onClick={() => router.push("/advertiser")}
+              className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-400 transition-colors"
+            >
+              Become an advertiser
             </button>
           </div>
         </div>

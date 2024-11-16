@@ -17,9 +17,9 @@ export default function ConnectButton() {
   return (
     <button
       onClick={handleConnect}
-      className="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+      className="px-6 py-2 text-sm font-medium text-blue-600 bg-white border-2 border-blue-600 rounded-full hover:bg-blue-50 transition-colors"
     >
-      {isConnected ? "Connected" : "Log In"}
+      {isConnected ? "Hi!😋" : "Log In"}
     </button>
   );
 }
