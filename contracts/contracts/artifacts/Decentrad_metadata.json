@@ -1,0 +1,2033 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "AccessControlBadConfirmation",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "neededRole",
+						"type": "bytes32"
+					}
+				],
+				"name": "AccessControlUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidInitialization",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NotInitializing",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ReentrancyGuardReentrantCall",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "SafeERC20FailedOperation",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "advIdAlreadyExist",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "advSpaceId",
+						"type": "bytes32"
+					}
+				],
+				"name": "advSpaceDoesntExist",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "advertiseDoesntExist",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "advIds",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "address",
+						"name": "walletAddr",
+						"type": "address"
+					}
+				],
+				"name": "zeroBalanceForAdv",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_advertiser",
+						"type": "address"
+					}
+				],
+				"name": "AdvAddedToAdvSpace",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_approvedBy",
+						"type": "address"
+					}
+				],
+				"name": "AdvApproved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "AdvContentUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_prevPayRate",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_newPayRate",
+						"type": "uint256"
+					}
+				],
+				"name": "AdvPaymentUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_rejectedBy",
+						"type": "address"
+					}
+				],
+				"name": "AdvRejected",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_restartedBy",
+						"type": "address"
+					}
+				],
+				"name": "AdvRestarted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_size",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "_pageURL",
+						"type": "string"
+					}
+				],
+				"name": "AdvSpaceCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bool",
+						"name": "_isEnabled",
+						"type": "bool"
+					}
+				],
+				"name": "AdvSpaceStatusChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					}
+				],
+				"name": "AdvSpaceUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_stoppedBy",
+						"type": "address"
+					}
+				],
+				"name": "AdvStopped",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "AdvertiserWithdraw",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "version",
+						"type": "uint64"
+					}
+				],
+				"name": "Initialized",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address[]",
+						"name": "_modAddress",
+						"type": "address[]"
+					}
+				],
+				"name": "ModeratorAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address[]",
+						"name": "_modAddress",
+						"type": "address[]"
+					}
+				],
+				"name": "ModeratorRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32[]",
+						"name": "_advIds",
+						"type": "bytes32[]"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "PublisherWithdraw",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "previousAdminRole",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "newAdminRole",
+						"type": "bytes32"
+					}
+				],
+				"name": "RoleAdminChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "RoleGranted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "RoleRevoked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TokensDeposited",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "DEFAULT_ADMIN_ROLE",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "MODERATOR",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_modAddresses",
+						"type": "address[]"
+					}
+				],
+				"name": "addModerators",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "advAdvertiserWithdrawnAmt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "advDepositAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "advIdToModeratorPaid",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "advPubWithdrawnAmt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "advSpaceCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "approveAdv",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "balOfAdvertiserByAdvId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "balOfPubByAdvId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "_advTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_advText",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_ipfsHashes",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_paymentRatePerSec",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_depositAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_advLink",
+						"type": "string"
+					}
+				],
+				"name": "createAdvAndAddToAdvSpace",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_size",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "_pageURL",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_moderationFees",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					}
+				],
+				"name": "createAdvSpace",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "depositForAdv",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "description",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "erc20TokenAddress",
+				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "_advIds",
+						"type": "bytes32[]"
+					}
+				],
+				"name": "getAdsByIds",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "bytes32",
+								"name": "advSpaceId",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "address",
+								"name": "advertiser",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "advTitle",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "advText",
+								"type": "string"
+							},
+							{
+								"internalType": "enum IDecentrad.AdvStatus",
+								"name": "advStatus",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string[]",
+								"name": "ipfsHashes",
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "paymentRatePerSec",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "advLink",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Decentrad.Advertise[]",
+						"name": "",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "bool[]",
+						"name": "",
+						"type": "bool[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "getAdvDurationCycles",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "stopTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "payRatePerSecond",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Decentrad.ActiveDuration[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_advAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_advTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					}
+				],
+				"name": "getAdvId",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					}
+				],
+				"name": "getAdvIdsOfAdvSpace",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_advertiserAddr",
+						"type": "address"
+					}
+				],
+				"name": "getAdvIdsOfAdvertiser",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pubAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_count",
+						"type": "uint256"
+					}
+				],
+				"name": "getAdvSpaceId",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "_advSpaceIds",
+						"type": "bytes32[]"
+					}
+				],
+				"name": "getAdvSpacesByIds",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "bytes32",
+								"name": "size",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "string",
+								"name": "pageURL",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "moderationFees",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "isEnabled",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct Decentrad.AdvSpace[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllAdvSpaceIds",
+				"outputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "",
+						"type": "bytes32[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "getIfAdvIsActive",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getModerators",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					}
+				],
+				"name": "getRoleAdmin",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "grantRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "hasRole",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_siteURL",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_erc20TokenAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_publisher",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_platformFeeAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_platformFeesPercentInBPS",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_pubFactoryAddr",
+						"type": "address"
+					}
+				],
+				"name": "initialize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "moderatorRecvdFees",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "moderators",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformFeeAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformFeesPercentInBPS",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "publisher",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "rejectAdv",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_modAddresses",
+						"type": "address[]"
+					}
+				],
+				"name": "removeModerators",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "callerConfirmation",
+						"type": "address"
+					}
+				],
+				"name": "renounceRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "restartAdv",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "revokeRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isEnabled",
+						"type": "bool"
+					}
+				],
+				"name": "setAdvSpaceStatus",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "siteURL",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					}
+				],
+				"name": "stopAdv",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalAdvCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "_advText",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_advTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_ipfsHashes",
+						"type": "string[]"
+					},
+					{
+						"internalType": "string",
+						"name": "_advLink",
+						"type": "string"
+					}
+				],
+				"name": "updateAdvContent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_paymentRatePerSec",
+						"type": "uint256"
+					}
+				],
+				"name": "updateAdvPayment",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advSpaceId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_size",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "_pageURL",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_moderationFees",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					}
+				],
+				"name": "updateAdvSpace",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_newDescription",
+						"type": "string"
+					}
+				],
+				"name": "updateDescription",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_newSiteURL",
+						"type": "string"
+					}
+				],
+				"name": "updateSiteURL",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_advId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawAdvertiser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32[]",
+						"name": "_advIds",
+						"type": "bytes32[]"
+					}
+				],
+				"name": "withdrawPublisher",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"errors": {
+				"AccessControlBadConfirmation()": [
+					{
+						"details": "The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}."
+					}
+				],
+				"AccessControlUnauthorizedAccount(address,bytes32)": [
+					{
+						"details": "The `account` is missing a role."
+					}
+				],
+				"InvalidInitialization()": [
+					{
+						"details": "The contract is already initialized."
+					}
+				],
+				"NotInitializing()": [
+					{
+						"details": "The contract is not initializing."
+					}
+				],
+				"ReentrancyGuardReentrantCall()": [
+					{
+						"details": "Unauthorized reentrant call."
+					}
+				],
+				"SafeERC20FailedOperation(address)": [
+					{
+						"details": "An operation with an ERC-20 token failed."
+					}
+				],
+				"advIdAlreadyExist(bytes32)": [
+					{
+						"details": "Error in case advId doesn't exist",
+						"params": {
+							"advId": "is Id adv"
+						}
+					}
+				],
+				"advSpaceDoesntExist(bytes32)": [
+					{
+						"details": "Error in case adv space doesn't exist",
+						"params": {
+							"advSpaceId": "is Id of adv space"
+						}
+					}
+				],
+				"advertiseDoesntExist(bytes32)": [
+					{
+						"details": "Error in case adv doesn't exist",
+						"params": {
+							"advId": "is Id of adv"
+						}
+					}
+				],
+				"zeroBalanceForAdv(bytes32[],address)": [
+					{
+						"details": "Error in case adv balance is zero",
+						"params": {
+							"advIds": "is array of advIds",
+							"walletAddr": "is address of publisher"
+						}
+					}
+				]
+			},
+			"events": {
+				"AdvAddedToAdvSpace(bytes32,bytes32,address)": {
+					"details": "Emitted when adv of ID (`_advId) is added to space of (`_advSpaceId`) by (`_advertiser`)"
+				},
+				"AdvApproved(bytes32,address)": {
+					"details": "Emitted when adv of ID (`_advId) is approved by moderator or publisher of address (`_approvedBy`)"
+				},
+				"AdvContentUpdated(bytes32)": {
+					"details": "Emitted when content of adv of ID (`_advId) is updated"
+				},
+				"AdvPaymentUpdated(bytes32,uint256,uint256)": {
+					"details": "Emitted when payment rate of adv of ID (`_advId) is updated from (`_prevPayRate`) to (`_newPayRate`)"
+				},
+				"AdvRejected(bytes32,address)": {
+					"details": "Emitted when adv of ID (`_advId) is rejected by moderator or publisher of address (`_rejectedBy`)"
+				},
+				"AdvRestarted(bytes32,address)": {
+					"details": "Emitted when adv of ID (`_advId) is restarted by moderator/publisher/advertiser of address (`_restartedBy`)"
+				},
+				"AdvSpaceCreated(bytes32,bytes32,string)": {
+					"details": "Emitted when adv space is created with (`_advSpaceId`), of given (`_size`) and (`_pageURL`)"
+				},
+				"AdvSpaceStatusChanged(bytes32,bool)": {
+					"details": "Emitted when adv space of (`_advSpaceId`) is enabled or disabled with bool (`_isEnabled`)"
+				},
+				"AdvSpaceUpdated(bytes32)": {
+					"details": "Emitted when adv space of (`_advSpaceId`) is updated"
+				},
+				"AdvStopped(bytes32,address)": {
+					"details": "Emitted when adv of ID (`_advId) is stopped by moderator/publisher/advertiser of address (`_stoppedBy`)"
+				},
+				"AdvertiserWithdraw(bytes32,uint256)": {
+					"details": "Emitted when advertiser withdraws balance of adv of id (`_advId`) with (`_amount`) of tokens"
+				},
+				"Initialized(uint64)": {
+					"details": "Triggered when the contract has been initialized or reinitialized."
+				},
+				"ModeratorAdded(address[])": {
+					"details": "Emitted when moderators with (`_modAddress`) are added "
+				},
+				"ModeratorRemoved(address[])": {
+					"details": "Emitted when moderators with (`_modAddress`) are removed "
+				},
+				"PublisherWithdraw(bytes32[],uint256)": {
+					"details": "Emitted when publisher withdraws balance of ads of ids (`_advIds`) with total (`_amount`) of tokens"
+				},
+				"RoleAdminChanged(bytes32,bytes32,bytes32)": {
+					"details": "Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted signaling this."
+				},
+				"RoleGranted(bytes32,address,address)": {
+					"details": "Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}."
+				},
+				"RoleRevoked(bytes32,address,address)": {
+					"details": "Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)"
+				},
+				"TokensDeposited(bytes32,uint256)": {
+					"details": "Emitted when (`_amount`) of ERC20 tokens are deposited to adv of ID (`_advId)"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"details": "_disableInitializers prevents initialization of the implementation contract itself"
+				},
+				"getAdsByIds(bytes32[])": {
+					"params": {
+						"_advIds": "is array of advId"
+					},
+					"returns": {
+						"_0": "array of advertise details and true/false if adv is active or not "
+					}
+				},
+				"getAdvDurationCycles(bytes32)": {
+					"params": {
+						"_advId": "is id of adv"
+					},
+					"returns": {
+						"_0": "array of struct ActiveDuration"
+					}
+				},
+				"getAdvId(address,string,bytes32)": {
+					"returns": {
+						"_0": "advId of adv"
+					}
+				},
+				"getAdvSpaceId(address,uint256)": {
+					"returns": {
+						"_0": "advSpaceId of adv space"
+					}
+				},
+				"getAdvSpacesByIds(bytes32[])": {
+					"params": {
+						"_advSpaceIds": "is array of advSpaceId"
+					},
+					"returns": {
+						"_0": "array of adv space details "
+					}
+				},
+				"getAllAdvSpaceIds()": {
+					"returns": {
+						"_0": "array of adv space Ids "
+					}
+				},
+				"getModerators()": {
+					"returns": {
+						"_0": "array if addresses of moderators"
+					}
+				},
+				"getRoleAdmin(bytes32)": {
+					"details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
+				},
+				"grantRole(bytes32,address)": {
+					"details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event."
+				},
+				"hasRole(bytes32,address)": {
+					"details": "Returns `true` if `account` has been granted `role`."
+				},
+				"initialize(string,string,address,address,address,uint256,address)": {
+					"details": "See {IDecentrad-initialize}."
+				},
+				"renounceRole(bytes32,address)": {
+					"details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `callerConfirmation`. May emit a {RoleRevoked} event."
+				},
+				"revokeRole(bytes32,address)": {
+					"details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event."
+				},
+				"setAdvSpaceStatus(bytes32,bool)": {
+					"params": {
+						"_advSpaceId": "is id of adv space",
+						"_isEnabled": "is true if adv space is to be enabled, false if adv space is to be disabled NOTE:  - only publisher who deployed the contract can call this function"
+					}
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				},
+				"updateDescription(string)": {
+					"params": {
+						"_newDescription": "is new description for publisher's website NOTE: `_newDescription` can be empty string"
+					}
+				},
+				"updateSiteURL(string)": {
+					"params": {
+						"_newSiteURL": "is new page URL of publisher's website Requirements: - `totalAdvCount` cannot be greater than zero, means siteURL can be updated only if no adv is added to contract. - `_newSiteURL` cannot be empty"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"addModerators(address[])": {
+					"notice": "See {IDecentrad-addModerators}. NOTE: only publisher who deployed contract can add moderators"
+				},
+				"advDepositAmount(bytes32)": {
+					"notice": "See {IDecentrad-advDepositAmount}."
+				},
+				"approveAdv(bytes32)": {
+					"notice": "See {IDecentrad-approveAdv}. Requirements:  - adv space should be enabled - adv shouldn't be already approved NOTE: transfers moderator fee to moderator address, fee is send only once to first moderator who does the moderation action"
+				},
+				"balOfAdvertiserByAdvId(bytes32)": {
+					"notice": "See {IDecentrad-balOfAdvertiserByAdvId}."
+				},
+				"balOfPubByAdvId(bytes32)": {
+					"notice": "See {IDecentrad-balOfPubByAdvId}."
+				},
+				"createAdvAndAddToAdvSpace(bytes32,string,string,string[],uint256,uint256,string)": {
+					"notice": "See {IDecentrad-createAdvAndAddToAdvSpace}. Requirements:  - adv space should be enabled - `_advTitle` cannot be empty - `_advText` cannot be empty - `_paymentRatePerSec` cannot be zero NOTE: transfers platform deposit fee to platform fee address external call to DecentradFactory.assignContractToAdvertiser to add contract to advertiserContracts in Factory"
+				},
+				"createAdvSpace(bytes32,string,uint256,string)": {
+					"notice": "See {IDecentrad-createAdvSpace}. Requirements: - `_pageURL` cannot be empty - only publisher who deployed the contract can call this function"
+				},
+				"depositForAdv(bytes32,uint256)": {
+					"notice": "See {IDecentrad-depositForAdv}. Requirements:  - adv space should be enabled NOTE: transfers platform deposit fee to platform fee address"
+				},
+				"getAdsByIds(bytes32[])": {
+					"notice": "Fetches adv details "
+				},
+				"getAdvDurationCycles(bytes32)": {
+					"notice": "Fetches duration cycles starttime-stoptime in which adv is active"
+				},
+				"getAdvId(address,string,bytes32)": {
+					"notice": "gets adv Id "
+				},
+				"getAdvIdsOfAdvSpace(bytes32)": {
+					"notice": "See {IDecentrad-getAdvIdsOfAdvSpace}."
+				},
+				"getAdvIdsOfAdvertiser(address)": {
+					"notice": "See {IDecentrad-getAdvIdsOfAdvertiser}."
+				},
+				"getAdvSpaceId(address,uint256)": {
+					"notice": "gets adv space Id "
+				},
+				"getAdvSpacesByIds(bytes32[])": {
+					"notice": "Fetches adv space details "
+				},
+				"getAllAdvSpaceIds()": {
+					"notice": "Fetches all adv space Ids of contract "
+				},
+				"getIfAdvIsActive(bytes32)": {
+					"notice": "See {IDecentrad-getIfAdvIsActive}."
+				},
+				"getModerators()": {
+					"notice": "fetches all moderator addresses"
+				},
+				"rejectAdv(bytes32)": {
+					"notice": "See {IDecentrad-rejectAdv}. Requirements:  - adv shouldn't be already approved or rejected NOTE: transfers moderator fee to moderator address, fee is send only once to first moderator who does the moderation action"
+				},
+				"removeModerators(address[])": {
+					"notice": "See {IDecentrad-removeModerators}. NOTE: only publisher who deployed contract can remove moderators"
+				},
+				"restartAdv(bytes32)": {
+					"notice": "See {IDecentrad-restartAdv}. Requirements:  - adv space should be enabled - adv shouldn be in stopped state"
+				},
+				"setAdvSpaceStatus(bytes32,bool)": {
+					"notice": "Updates status of adv space if enabled or disabled"
+				},
+				"stopAdv(bytes32)": {
+					"notice": "See {IDecentrad-stopAdv}. Requirements:  - adv shouldn't be already stopped - adv shouldn be in active state"
+				},
+				"updateAdvContent(bytes32,string,string,string[],string)": {
+					"notice": "See {IDecentrad-updateAdvContent}. NOTE:  - updates if `_advText` is not empty - updates if `_advTitle` is not empty - updates if `_ipfsHashes` array is not empty - updates if `_advLink`  is not empty - only advertise who added adv in the contract can update the content"
+				},
+				"updateAdvPayment(bytes32,uint256)": {
+					"notice": "See {IDecentrad-updateAdvPayment}. Requirements: `_paymentRatePerSec` should be greater than zero. NOTE:  - updates if `_advText` is not empty - updates if `_advTitle` is not empty - updates if `_ipfsHashes` array is not empty - updates if `_advLink`  is not empty - only advertise who added adv in the contract can update the payment rate"
+				},
+				"updateAdvSpace(bytes32,bytes32,string,uint256,string)": {
+					"notice": "See {IDecentrad-updateAdvSpace}. NOTE:  - updates if `_size` is different than previous size - updates if `_pageURL` is not empty - updates if `_description` is not empty - updates if `_moderationFees` is different than previous fees - only publisher who deployed the contract can call this function"
+				},
+				"updateDescription(string)": {
+					"notice": "Updates description Publisher's contract"
+				},
+				"updateSiteURL(string)": {
+					"notice": "Updates website URL of Publisher's contract"
+				},
+				"withdrawAdvertiser(bytes32,uint256)": {
+					"notice": "See {IDecentrad-withdrawAdvertiser}. Requirements: `_amount` should be greater than zero. `_amount` should be less than remaining token balance of adv. NOTE:  - only advertise who added adv in the contract can withdraw remaining token balance of adv transfers tokens to advertisers wallet address"
+				},
+				"withdrawPublisher(bytes32[])": {
+					"notice": "See {IDecentrad-withdrawPublisher}. NOTE:  - only publisher who deployed contract can withdraw consumed token balance "
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Decentrad.sol": "Decentrad"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/AccessControl.sol": {
+			"keccak256": "0xa0e92d42942f4f57c5be50568dac11e9d00c93efcb458026e18d2d9b9b2e7308",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://46326c0bb1e296b67185e81c918e0b40501b8b6386165855df0a3f3c634b6a80",
+				"dweb:/ipfs/QmTwyrDYtsxsk6pymJTK94PnEpzsmkpUxFuzEiakDopy4Z"
+			]
+		},
+		"@openzeppelin/contracts/access/IAccessControl.sol": {
+			"keccak256": "0xc1c2a7f1563b77050dc6d507db9f4ada5d042c1f6a9ddbffdc49c77cdc0a1606",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd54abb96a6156d9a761f6fdad1d3004bc48d2d4fce47f40a3f91a7ae83fc3a1",
+				"dweb:/ipfs/QmUrFSGkTDJ7WaZ6qPVVe3Gn5uN2viPb7x7QQ35UX4DofX"
+			]
+		},
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC1363.sol": {
+			"keccak256": "0x9b6b3e7803bc5f2f8cd7ad57db8ac1def61a9930a5a3107df4882e028a9605d7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://da62d6be1f5c6edf577f0cb45666a8aa9c2086a4bac87d95d65f02e2f4c36a4b",
+				"dweb:/ipfs/QmNkpvBpoCMvX8JwAFNSc5XxJ2q5BXJpL5L1txb4QkqVFF"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0xde7e9fd9aee8d4f40772f96bb3b58836cbc6dfc0227014a061947f8821ea9724",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11fea9f8bc98949ac6709f0c1699db7430d2948137aa94d5a9e95a91f61a710a",
+				"dweb:/ipfs/QmQdfRXxQjwP6yn3DVo1GHPpriKNcFghSPi94Z1oKEFUNS"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC20.sol": {
+			"keccak256": "0xce41876e78d1badc0512229b4d14e4daf83bc1003d7f83978d18e0e56f965b9c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a2608291cb038b388d80b79a06b6118a42f7894ff67b7da10ec0dbbf5b2973ba",
+				"dweb:/ipfs/QmWohqcBLbcxmA4eGPhZDXe5RYMMEEpFq22nfkaUMvTfw1"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+			"keccak256": "0x880da465c203cec76b10d72dbd87c80f387df4102274f23eea1f9c9b0918792b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://399594cd8bb0143bc9e55e0f1d071d0d8c850a394fb7a319d50edd55d9ed822b",
+				"dweb:/ipfs/QmbPZzgtT6LEm9CMqWfagQFwETbV1ztpECBB1DtQHrKiRz"
+			]
+		},
+		"@openzeppelin/contracts/proxy/Clones.sol": {
+			"keccak256": "0xf55d01dac75cffdabec6833a79bf3be0c108fc0db10e273daf7adfd3e9e59dae",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://540002a50a2a1a2b9dafffb976178e55adbf8d3a28db462c69f996921479c6b0",
+				"dweb:/ipfs/QmQNAFyMf2FW3U1giM4Yej3zzd1pnxMtAA5GoADj4hTYYD"
+			]
+		},
+		"@openzeppelin/contracts/proxy/utils/Initializable.sol": {
+			"keccak256": "0x631188737069917d2f909d29ce62c4d48611d326686ba6683e26b72a23bfac0b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7a61054ae84cd6c4d04c0c4450ba1d6de41e27e0a2c4f1bcdf58f796b401c609",
+				"dweb:/ipfs/QmUvtdp7X1mRVyC3CsHrtPbgoqWaXHp3S1ZR24tpAQYJWM"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+			"keccak256": "0xbf61ab2ae1d575a17ea58fbb99ca232baddcc4e0eeea180e84cbc74b0c348b31",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4e0968705bad99747a8e5288aa008678c2be2f471f919dce3925a3cc4f1dee09",
+				"dweb:/ipfs/QmbAFnCQfo4tw6ssfQSjhA5LzwHWNNryXN8bX7ty8jiqqn"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db",
+				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x70f2f713b13b7ce4610bcd0ac9fec0f3cc43693b043abcb8dc40a42a726eb330",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c13d13304ac79a83ab1c30168967d19e2203342ebbd6a9bbce4db7550522dcbf",
+				"dweb:/ipfs/QmeN5jKMN2vw5bhacr6tkg78afbTTZUeaacNHqjWt4Ew1r"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0xca2ae13e0610f6a99238dd00b97bd786bc92732dae6d6b9d61f573ec51018310",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://75f8c71ce0c91c40dd5f249ace0b7d8270f8f1767231bcf71490f7157d6ba862",
+				"dweb:/ipfs/QmYXgxeDyFHvz3JsXxLEYN6GNUR44ThHeFj5XkpkgMoG4w"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23",
+				"dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/Errors.sol": {
+			"keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
+				"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+			]
+		},
+		"@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
+			"keccak256": "0x11a5a79827df29e915a12740caf62fe21ebe27c08c9ae3e09abe9ee3ba3866d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3cf0c69ab827e3251db9ee6a50647d62c90ba580a4d7bbff21f2bea39e7b2f4a",
+				"dweb:/ipfs/QmZiKwtKU1SBX4RGfQtY7PZfiapbbu6SZ9vizGQD9UHjRA"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xddce8e17e3d3f9ed818b4f4c4478a8262aab8b11ed322f1bf5ed705bb4bd97fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8084aa71a4cc7d2980972412a88fe4f114869faea3fefa5436431644eb5c0287",
+				"dweb:/ipfs/Qmbqfs5dRdPvHVKY8kTaeyc65NdqXRQwRK7h9s5UJEhD1p"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621",
+				"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
+			]
+		},
+		"Decentrad.sol": {
+			"keccak256": "0x97ff56382132547c3b6c2196ebd2dcf0c6064e1871fcbe6ee3f93ab2cd8ae8c3",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://51b5fbb1c4d712f776a5be1c91a84d348c486dfea0c1ad722c5a6fdb33abaf32",
+				"dweb:/ipfs/QmRpJbEnNroDmcFujaGHgMa5XE1NaD3iPGCgcNuTsmbDQj"
+			]
+		},
+		"DecentradFactory.sol": {
+			"keccak256": "0x94311b9884083059c3b4bbfbade50682fa1895fb6a8defaa99d4695b4f5bb68d",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://b8a34537b3d3b33f06a58435b5f303c40c48c06b0ffc878a040634e05d1ea53c",
+				"dweb:/ipfs/Qmet7fbFKhMqQY3VVFWG6uRQFqAJXheLRjXFGGPaARETwQ"
+			]
+		},
+		"IDecentrad.sol": {
+			"keccak256": "0x901b3d829499eb445d3865e949a6903fba2971299126cbc10d409b351146c851",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://c82189733236b588b8cc5783696e84cb807748fa44b85a8503b2c893a399b77c",
+				"dweb:/ipfs/QmUBuAo3PG9yUpyfSP2DzYiGXWpX7E7z4CWKLwFjMUEkXF"
+			]
+		}
+	},
+	"version": 1
+}
