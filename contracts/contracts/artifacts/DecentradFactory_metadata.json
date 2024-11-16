@@ -1,0 +1,872 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_implementation",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_platformFeeAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_platformFeesPercentInBPS",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "FailedDeployment",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "needed",
+						"type": "uint256"
+					}
+				],
+				"name": "InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "publisherAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "cloneAddress",
+						"type": "address"
+					}
+				],
+				"name": "PubCloneContractExists",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allPublisherClones",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "siteURL",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "cloneAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_advAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_publisher",
+						"type": "address"
+					}
+				],
+				"name": "assignContractToAdvertiser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_modAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_publisher",
+						"type": "address"
+					}
+				],
+				"name": "assignPubContractToModerator",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_siteURL",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_erc20TokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "createPublisherClone",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pubWalletAddress",
+						"type": "address"
+					}
+				],
+				"name": "getAllPubClonesByAddress",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "siteURL",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "cloneAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct DecentradFactory.PublisherClone[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllPublisherContracts",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "siteURL",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "cloneAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct DecentradFactory.PublisherClone[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pubWalletAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_cloneAddress",
+						"type": "address"
+					}
+				],
+				"name": "getClone",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "siteURL",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "cloneAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct DecentradFactory.PublisherClone",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_advAddress",
+						"type": "address"
+					}
+				],
+				"name": "getCloneContractsOfAdvertiser",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPubContractCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_pubWalletAddress",
+						"type": "address"
+					}
+				],
+				"name": "getPubContractCountByAddress",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_modAddress",
+						"type": "address"
+					}
+				],
+				"name": "getPubContractsOfModerator",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "implementation",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isAddedToAdvertiserContracts",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isAddedToModeratorContracts",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "moderatorAccContractsPointer",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformFeeAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "platformFeesPercentInBPS",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "publisherClones",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "siteURL",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "cloneAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_modAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_publisher",
+						"type": "address"
+					}
+				],
+				"name": "removePubContractOfModerator",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_percentInBPS",
+						"type": "uint256"
+					}
+				],
+				"name": "setPlatforFeesPercentInBPS",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_feeAddress",
+						"type": "address"
+					}
+				],
+				"name": "setPlatformFeeAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_implementation",
+						"type": "address"
+					}
+				],
+				"name": "upgradeImplementationContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"errors": {
+				"FailedDeployment()": [
+					{
+						"details": "The deployment failed."
+					}
+				],
+				"InsufficientBalance(uint256,uint256)": [
+					{
+						"details": "The ETH balance of the account is not enough to perform the operation."
+					}
+				],
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				],
+				"PubCloneContractExists(address,address)": [
+					{
+						"params": {
+							"cloneAddress": "already deployed publisher contract address.",
+							"publisherAddress": "wallet address of publisher."
+						}
+					}
+				]
+			},
+			"kind": "dev",
+			"methods": {
+				"assignContractToAdvertiser(address,address,address)": {
+					"params": {
+						"_advAddress": "The wallet address of advertiser.",
+						"_contractAddress": "The address of clone.",
+						"_publisher": "The wallet address of publihser. Requirements: - `_advAddress` cannot be the zero address. - `_contractAddress` cannot be the zero address. - `_publisher` cannot be the zero address."
+					}
+				},
+				"assignPubContractToModerator(address,address,address)": {
+					"params": {
+						"_contractAddress": "The address of clone.",
+						"_modAddress": "The wallet address of moderator.",
+						"_publisher": "The wallet address of publihser. Requirements: - `_modAddress` cannot be the zero address. - `_contractAddress` cannot be the zero address. - `_publisher` cannot be the zero address."
+					}
+				},
+				"constructor": {
+					"details": "Throws if the _implementation is invalid address.",
+					"params": {
+						"_implementation": "contract address of the deployed publisher contract. Requirements: - `_implementation` cannot be the zero address. - `_platformFeeAddress` cannot be the zero address."
+					}
+				},
+				"createPublisherClone(string,string,address)": {
+					"details": "Throws if pageURL or ERC20 token address in invalid",
+					"params": {
+						"_description": "The description related to Publisher.",
+						"_erc20TokenAddress": "The token address if ERC token that publisher wants to receive as fees. Requirements: - `_siteURL` cannot be empty. - `_erc20TokenAddress` cannot be the zero address.",
+						"_siteURL": "The main website URL."
+					}
+				},
+				"getAllPubClonesByAddress(address)": {
+					"returns": {
+						"_0": "The array of addresses of publisher's clone contracts."
+					}
+				},
+				"getAllPublisherContracts()": {
+					"returns": {
+						"_0": "The array of addresses of publishers' clone contracts."
+					}
+				},
+				"getClone(address,address)": {
+					"params": {
+						"_cloneAddress": "The address of clone.",
+						"_pubWalletAddress": "The wallet address of publisher."
+					},
+					"returns": {
+						"_0": "The struct of PublisherClone."
+					}
+				},
+				"getCloneContractsOfAdvertiser(address)": {
+					"returns": {
+						"_0": "The array of contract addresses of a given advertiser."
+					}
+				},
+				"getPubContractCount()": {
+					"returns": {
+						"_0": "The number of total publisher clone contracts."
+					}
+				},
+				"getPubContractCountByAddress(address)": {
+					"returns": {
+						"_0": "The number of total clone contracts of a given publisher."
+					}
+				},
+				"getPubContractsOfModerator(address)": {
+					"returns": {
+						"_0": "The array of contract addresses of a given moderator."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"removePubContractOfModerator(address,address,address)": {
+					"params": {
+						"_contractAddress": "The address of clone.",
+						"_modAddress": "The wallet address of moderator.",
+						"_publisher": "The wallet address of publihser. Requirements: - `_modAddress` cannot be the zero address. - `_contractAddress` cannot be the zero address. - `_publisher` cannot be the zero address."
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"setPlatforFeesPercentInBPS(uint256)": {
+					"params": {
+						"_percentInBPS": "The percentage in BPS format, example: 3% -> 300"
+					}
+				},
+				"setPlatformFeeAddress(address)": {
+					"params": {
+						"_feeAddress": "The address to receive deposit fess Requirements: - `_feeAddress` cannot be the zero address."
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				},
+				"upgradeImplementationContract(address)": {
+					"params": {
+						"_implementation": "new publisher implementation contract address Requirements: - `_implementation` cannot be the zero address."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"errors": {
+				"PubCloneContractExists(address,address)": [
+					{
+						"notice": "If Publisher has already created clone contract with sending wallet address"
+					}
+				]
+			},
+			"kind": "user",
+			"methods": {
+				"allPublisherClones(uint256)": {
+					"notice": "Array of the all publisher contract addresses."
+				},
+				"assignContractToAdvertiser(address,address,address)": {
+					"notice": "adds publiser contract address to advertiseContracts array"
+				},
+				"assignPubContractToModerator(address,address,address)": {
+					"notice": "adds publiser contract address to moderatorContracts array"
+				},
+				"createPublisherClone(string,string,address)": {
+					"notice": "Creates the clone of publisher contract."
+				},
+				"getAllPubClonesByAddress(address)": {
+					"notice": "Returns all the clone contracts of a publihser's wallet address."
+				},
+				"getAllPublisherContracts()": {
+					"notice": "Returns all the clone contract address created by factory."
+				},
+				"getClone(address,address)": {
+					"notice": "Returns details of clone contract."
+				},
+				"getCloneContractsOfAdvertiser(address)": {
+					"notice": "Returns publisher's contract addresses of advertiser."
+				},
+				"getPubContractCount()": {
+					"notice": "Returns total count of all publisher clones created by factory."
+				},
+				"getPubContractCountByAddress(address)": {
+					"notice": "Returns total count of publisher's clones."
+				},
+				"getPubContractsOfModerator(address)": {
+					"notice": "Returns publisher's contract addresses of moderator."
+				},
+				"implementation()": {
+					"notice": "The deployed contract address of publisher implementation."
+				},
+				"isAddedToAdvertiserContracts(address,address)": {
+					"notice": "Mapping of the advertiser to clone contract address to if it is added to _advertiserContracts. mapping advertiser walletAddress => clone contract => true/false"
+				},
+				"isAddedToModeratorContracts(address,address)": {
+					"notice": "Mapping of the moderator to if clone contract address is added to _moderatorContracts. mapping moderator's walletAddress => clone contract address => true/false "
+				},
+				"moderatorAccContractsPointer(address,address)": {
+					"notice": "Mapping of the moderator address to publisher clone contract address to index of _moderatorContracts. mapping moderator's walletAddress => clone contract address => index in _moderatorContracts"
+				},
+				"publisherClones(address,uint256)": {
+					"notice": "Mapping of the publiusher's wallet address to publisher clone . mapping publisher's walletAddress => array of publisher clones"
+				},
+				"removePubContractOfModerator(address,address,address)": {
+					"notice": "removes publiser contract address from moderatorContracts array"
+				},
+				"setPlatforFeesPercentInBPS(uint256)": {
+					"notice": "to reset the platform fees percent amount"
+				},
+				"setPlatformFeeAddress(address)": {
+					"notice": "to reset the platform fees receiver address"
+				},
+				"upgradeImplementationContract(address)": {
+					"notice": "to upgrade the implementation contract"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"DecentradFactory.sol": "DecentradFactory"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/proxy/Clones.sol": {
+			"keccak256": "0xf55d01dac75cffdabec6833a79bf3be0c108fc0db10e273daf7adfd3e9e59dae",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://540002a50a2a1a2b9dafffb976178e55adbf8d3a28db462c69f996921479c6b0",
+				"dweb:/ipfs/QmQNAFyMf2FW3U1giM4Yej3zzd1pnxMtAA5GoADj4hTYYD"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/Errors.sol": {
+			"keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
+				"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+			]
+		},
+		"DecentradFactory.sol": {
+			"keccak256": "0x94311b9884083059c3b4bbfbade50682fa1895fb6a8defaa99d4695b4f5bb68d",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://b8a34537b3d3b33f06a58435b5f303c40c48c06b0ffc878a040634e05d1ea53c",
+				"dweb:/ipfs/Qmet7fbFKhMqQY3VVFWG6uRQFqAJXheLRjXFGGPaARETwQ"
+			]
+		},
+		"IDecentrad.sol": {
+			"keccak256": "0x901b3d829499eb445d3865e949a6903fba2971299126cbc10d409b351146c851",
+			"license": "Unlicense",
+			"urls": [
+				"bzz-raw://c82189733236b588b8cc5783696e84cb807748fa44b85a8503b2c893a399b77c",
+				"dweb:/ipfs/QmUBuAo3PG9yUpyfSP2DzYiGXWpX7E7z4CWKLwFjMUEkXF"
+			]
+		}
+	},
+	"version": 1
+}
