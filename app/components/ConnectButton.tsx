@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <header className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center bg-white/80 backdrop-blur-sm z-50">
-        <div className="text-xl font-bold">DecentrAd</div>
+        <div className="text-xl font-bold">AllowFlow</div>
         <ConnectButton />
       </header>
 
