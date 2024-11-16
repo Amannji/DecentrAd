@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ConnectPublicClient } from "../../config/config";
-import { abi as publisherAbi } from "../../../abi/DecentradFactory.json";
+import { ConnectPublicClient } from "../../../config/config";
+import { abi as publisherAbi } from "../../../../abi/DecentradFactory.json";
 // import { useDynamicContext } from "@dynamic-labs/sdk-react";
 import { useAccount } from "wagmi";
 

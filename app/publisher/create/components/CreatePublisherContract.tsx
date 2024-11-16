@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ConnectWalletClient, ConnectPublicClient } from "../../config/config";
-import { abi as publisherAbi } from "../../../abi/DecentradFactory.json";
+import {
+  ConnectWalletClient,
+  ConnectPublicClient,
+} from "../../../config/config";
+import { abi as publisherAbi } from "../../../../abi/DecentradFactory.json";
 
-export default function CreatePublisherContract() {
+export default function CreatePublisherContract({
+  setIsStep2,
+}: {
+  setIsStep2: (value: boolean) => void;
+}) {
   const router = useRouter();
   const walletClient = ConnectWalletClient();
   const publicClient = ConnectPublicClient();
@@ -31,6 +38,7 @@ export default function CreatePublisherContract() {
         account: account[0],
       });
       const tx = await publicClient.waitForTransactionReceipt({ hash });
+      setIsStep2(true);
       console.log(tx);
     } catch (error) {
       console.log(error);
