@@ -1,0 +1,691 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IDecentrad",
+  "sourceName": "contracts/IDecentrad.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_advertiser",
+          "type": "address"
+        }
+      ],
+      "name": "AdvAddedToAdvSpace",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_approvedBy",
+          "type": "address"
+        }
+      ],
+      "name": "AdvApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AdvContentUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_prevPayRate",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_newPayRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "AdvPaymentUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_rejectedBy",
+          "type": "address"
+        }
+      ],
+      "name": "AdvRejected",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_restartedBy",
+          "type": "address"
+        }
+      ],
+      "name": "AdvRestarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_size",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "_pageURL",
+          "type": "string"
+        }
+      ],
+      "name": "AdvSpaceCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "_isEnabled",
+          "type": "bool"
+        }
+      ],
+      "name": "AdvSpaceStatusChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AdvSpaceUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_stoppedBy",
+          "type": "address"
+        }
+      ],
+      "name": "AdvStopped",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AdvertiserWithdraw",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address[]",
+          "name": "_modAddress",
+          "type": "address[]"
+        }
+      ],
+      "name": "ModeratorAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address[]",
+          "name": "_modAddress",
+          "type": "address[]"
+        }
+      ],
+      "name": "ModeratorRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32[]",
+          "name": "_advIds",
+          "type": "bytes32[]"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "PublisherWithdraw",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokensDeposited",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_modAddresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "addModerators",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "advDepositAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "approveAdv",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_advTitle",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_advText",
+          "type": "string"
+        },
+        {
+          "internalType": "string[]",
+          "name": "_ipfsHashes",
+          "type": "string[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_paymentRatePerSec",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_depositAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_advLink",
+          "type": "string"
+        }
+      ],
+      "name": "createAdvAndAddToAdvSpace",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_size",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_pageURL",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_moderationFees",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "createAdvSpace",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositForAdv",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAdvIdsOfAdvSpace",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_advertiserAddr",
+          "type": "address"
+        }
+      ],
+      "name": "getAdvIdsOfAdvertiser",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getIfAdvIsActive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_pageURL",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_erc20TokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_publisher",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_platformFeeAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_platformFeesPercentInBPS",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_pubFactoryAddr",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "rejectAdv",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_modAddresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeModerators",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "restartAdv",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "stopAdv",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_advText",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_advTitle",
+          "type": "string"
+        },
+        {
+          "internalType": "string[]",
+          "name": "_ipfsHashes",
+          "type": "string[]"
+        },
+        {
+          "internalType": "string",
+          "name": "_advLink",
+          "type": "string"
+        }
+      ],
+      "name": "updateAdvContent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_paymentRatePerSec",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateAdvPayment",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advSpaceId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_size",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_pageURL",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_moderationFees",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "updateAdvSpace",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_advId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawAdvertiser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "_advIds",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "withdrawPublisher",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
