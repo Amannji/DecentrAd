@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { publisherFactoryABI, publisherABI } from './abi';
 const provider = new ethers.JsonRpcProvider(process.env.RPC_PROVIDER);
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 interface Domain {
   getPublisherContractsFromFactory: (ethAddress: string) => Promise<[string, string][]>;
@@ -10,6 +11,22 @@ interface Domain {
   getAdsByIds: (ethAddress: string, publisherContract: string, advIds: string[]) => Promise<[any[], boolean[]]>;
   getAdvIds: (ethAddress: string, publisherContract: string, adSpaceId: string) => Promise<string[]>;
 }
+
+const client = new ApolloClient({
+    uri: process.env.GRAPH_API_URL, // Add this to your .env file
+    cache: new InMemoryCache(),
+});
+const fetchGraphData = async (query: string) => {
+    try {
+      const response = await client.query({
+        query: gql`${query}`,
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching from The Graph:', error);
+      throw error;
+    }
+};
 
 const domain: Domain = {
   getPublisherContractsFromFactory: async (ethAddress: string) => {
