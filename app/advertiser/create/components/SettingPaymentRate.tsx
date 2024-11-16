@@ -1,12 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useAccount, useBalance } from "wagmi";
 
-export default function SettingPaymentRate() {
+export default function SettingPaymentRate({
+  formData,
+  setFormData,
+}: {
+  formData: any;
+  setFormData: any;
+}) {
   const router = useRouter();
-
-  const handleBack = () => {
-    router.back();
-  };
+  const { address } = useAccount();
+  const { data: balance } = useBalance({ address });
+  const [depositAmount, setDepositAmount] = useState(0);
 
   return (
     <div className="min-h-screen bg-blue-200">
@@ -27,7 +34,9 @@ export default function SettingPaymentRate() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Balance:</span>
-                <span className="font-semibold">0.00 ETH</span>
+                <span className="font-semibold">
+                  {Number(balance?.formatted).toFixed(4)}ETH
+                </span>
               </div>
             </div>
           </div>
@@ -46,6 +55,8 @@ export default function SettingPaymentRate() {
               <input
                 type="number"
                 id="depositAmount"
+                value={depositAmount}
+                onChange={(e) => setDepositAmount(Number(e.target.value))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="Enter deposit amount"
                 step="0.01"
@@ -55,11 +66,14 @@ export default function SettingPaymentRate() {
             <div className="bg-gray-50 p-4 rounded-lg space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Deposit Fee (2%):</span>
-                <span>0.00 ETH</span>
+                <span>{Number(depositAmount * 0.02).toFixed(4)} ETH</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Amount for Ad Spend:</span>
-                <span>0.00 ETH</span>
+                <span>
+                  {(depositAmount - Number(depositAmount * 0.02)).toFixed(4)}
+                  ETH
+                </span>
               </div>
             </div>
 
@@ -91,7 +105,7 @@ export default function SettingPaymentRate() {
 
         <div className="bg-white p-4 rounded-lg flex justify-between items-center">
           <button
-            onClick={handleBack}
+            onClick={() => router.back()}
             className="px-6 py-2 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200"
           >
             Back

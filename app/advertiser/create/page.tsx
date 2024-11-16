@@ -5,13 +5,32 @@ import SettingPaymentRate from "./components/SettingPaymentRate";
 
 const CreateNewAd = () => {
   const [isStep2, setIsStep2] = useState(false);
+  const [formData, setFormData] = useState<{
+    advTitle: string;
+    advText: string;
+    ipfsHashes: string[];
+    paymentRatePerSec: number;
+    depositAmount: number;
+    advLink: string;
+  }>({
+    advTitle: "",
+    advText: "",
+    ipfsHashes: [],
+    paymentRatePerSec: 0,
+    depositAmount: 0,
+    advLink: "",
+  });
 
   return (
     <div>
       {isStep2 ? (
-        <SettingPaymentRate />
+        <SettingPaymentRate formData={formData} setFormData={setFormData} />
       ) : (
-        <UploadingCreatives setIsStep2={setIsStep2} />
+        <UploadingCreatives
+          setIsStep2={setIsStep2}
+          formData={formData}
+          setFormData={setFormData}
+        />
       )}
     </div>
   );

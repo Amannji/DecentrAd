@@ -15,10 +15,13 @@
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-query": "^5.27.5",
+    "axios": "^1.7.7",
+    "ipfs-http-client": "^60.0.1",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react-dropzone": "^14.3.5",
     "tailwindcss-animate": "^1.0.7",
     "viem": "*",
     "wagmi": "^2.5.7"
