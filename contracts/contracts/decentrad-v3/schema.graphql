@@ -142,7 +142,7 @@ type ModeratorRemoved @entity(immutable: true) {
 
 type PublisherWithdraw @entity(immutable: true) {
   id: Bytes!
-  _advIds: [Bytes!]! # bytes32[]
+  _advIds: [Bytes!]! @derivedFrom(field: "_advId") # bytes32[] 
   _amount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
