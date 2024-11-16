@@ -6,6 +6,7 @@ import SettingPaymentRate from "./components/SettingPaymentRate";
 const CreateNewAd = () => {
   const [isStep2, setIsStep2] = useState(false);
   const [formData, setFormData] = useState<{
+    advId: string;
     advTitle: string;
     advText: string;
     ipfsHashes: string[];
@@ -13,6 +14,7 @@ const CreateNewAd = () => {
     depositAmount: number;
     advLink: string;
   }>({
+    advId: "",
     advTitle: "",
     advText: "",
     ipfsHashes: [],
