@@ -15,30 +15,71 @@ export default function SettingPaymentRate({
 }) {
   const router = useRouter();
   const { address } = useAccount();
-  const { data: balance } = useBalance({ address });
+  const { data: balance } = useBalance({ 
+    address,
+    token: '0x1D9C9dDF1Eca111f4EBCf47F362f7b6503fFF914' // ERC20 token contract address
+  });
   const [depositAmount, setDepositAmount] = useState(parseEther("0"));
 
-  const contractAddress = "0x1A11eC2Cc811e610eBAa8975daA0A8c1a080d2d0";
+  const contractAddress = "0x9c1961f76B62A4B149722a652dFe4AC96bdAF27c";//"0x1A11eC2Cc811e610eBAa8975daA0A8c1a080d2d0";
   const contractAbi = advertiserContractAbi;
 
   const handleCreate = async () => {
     if (!address) return;
-
+    console.log("depositAmount", formatEther(depositAmount));
+    // First approve ERC20 spending
     await ConnectWalletClient().writeContract({
+      address: "0x1D9C9dDF1Eca111f4EBCf47F362f7b6503fFF914", // ERC20 token address
+      abi: [{
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256", 
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "approve",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }],
+      functionName: "approve",
+      args: [
+        "0x9c1961f76B62A4B149722a652dFe4AC96bdAF27c", // Spender contract
+        depositAmount // Amount to approve
+      ],
+      account: address,
+    });
+    const hash = await ConnectWalletClient().writeContract({
       address: contractAddress,
       abi: contractAbi,
       functionName: "createAdvAndAddToAdvSpace",
       args: [
-        toBytes(formData.advId),
+        "0x268cd244f656e632452c9d1c05c45ffa0a9bab2555c3236d53500e2749a79a1a",//toBytes(formData.advId),
         formData.advTitle,
         formData.advText,
         formData.ipfsHashes,
         formData.paymentRatePerSec,
-        formData.depositAmount,
+        depositAmount,
         formData.advLink,
       ],
       account: address,
     });
+    // Show transaction hash with blockscout link
+    console.log("Transaction submitted:", hash);
+    const blockscoutUrl = `https://eth-sepolia.blockscout.com/tx/${hash}`;
+    alert(`Transaction submitted! View on Blockscout: ${blockscoutUrl}`);
   };
   return (
     <div className="min-h-screen bg-blue-200">
@@ -60,7 +101,7 @@ export default function SettingPaymentRate({
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Balance:</span>
                 <span className="font-semibold">
-                  {Number(balance?.formatted).toFixed(4)}ETH
+                  {Number(balance?.formatted).toFixed(2)} tDRT
                 </span>
               </div>
             </div>
@@ -92,14 +133,13 @@ export default function SettingPaymentRate({
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Deposit Fee (2%):</span>
                 <span>
-                  {(Number(formatEther(depositAmount)) * 0.02).toFixed(4)} ETH
+                  {(Number(formatEther(depositAmount)) * 0.02).toFixed(2)} tDRT
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Amount for Ad Spend:</span>
                 <span>
-                  {(Number(formatEther(depositAmount)) * 0.98).toFixed(4)}
-                  ETH
+                  {(Number(formatEther(depositAmount)) * 0.98).toFixed(2)} tDRT
                 </span>
               </div>
             </div>
@@ -122,7 +162,7 @@ export default function SettingPaymentRate({
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      paymentRatePerSec: parseEther(e.target.value),
+                      paymentRatePerSec: (e.target.value),
                     })
                   }
                 />

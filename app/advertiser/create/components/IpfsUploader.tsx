@@ -5,7 +5,12 @@ import { create } from "ipfs-http-client";
 import { useDropzone } from "react-dropzone";
 import { File, Upload } from "lucide-react";
 import axios from "axios";
-import { ThirdwebStorage } from "@thirdweb-dev/storage";
+import { PinataSDK } from "pinata-web3";
+
+const pinata = new PinataSDK({
+  pinataJwt: process.env.NEXT_PUBLIC_PINATA_JWT,
+  pinataGateway: "https://gateway.pinata.cloud",
+});
 
 // Initialize IPFS client
 // Note: Replace with your own IPFS node address if you're not using the default
@@ -38,20 +43,24 @@ export default function IPFSUploader() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const res = await axios.post(
-          "https://api.pinata.cloud/pinning/pinFileToIPFS",
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.JWT}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        // const res = await axios.post(
+        //   "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        //   formData,
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${process.env.JWT}`,
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   }
+        // );
+
+        // const file = new File(["hello"], "Testing.txt", { type: "text/plain" });
+        const res = await pinata.upload.file(file);
+        console.log(res);
 
         setFiles((prev) => [
           ...prev,
-          { cid: res.data.IpfsHash, name: file.name },
+          { cid: res.IpfsHash, name: file.name },
         ]);
       } catch (error) {
         console.error("Error uploading file: ", error);

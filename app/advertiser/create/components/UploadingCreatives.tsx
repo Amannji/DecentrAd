@@ -28,8 +28,8 @@ export default function UploadingCreatives({
   const { address } = useAccount();
   const router = useRouter();
   // Add navigation handler
-  const publisherContract = "0x808ADaA716C41F69Fc99ebE11c03fe7a8a9683e1";
-  const advertiserContract = "0x1A11eC2Cc811e610eBAa8975daA0A8c1a080d2d0";
+  const publisherContract = "0x0b2f836957ED4028C5A1cdFAadDC1232216655f5";
+  const advertiserContract = "0xF819c667b5E6aa01F93fcb52B962D6C8B35F1826";
   const [publisherData, setPublisherData] = useState<PublisherData[]>([]);
   const handleBack = () => {
     router.push("/");

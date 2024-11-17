@@ -17,7 +17,7 @@ export default function CreatePublisherContract({
   const walletClient = ConnectWalletClient();
   const publicClient = ConnectPublicClient();
 
-  const publisherContract = "0x808adaa716c41f69fc99ebe11c03fe7a8a9683e1";
+  const publisherContract = "0x0b2f836957ED4028C5A1cdFAadDC1232216655f5";
   const publisherContractAbi = publisherAbi;
 
   const [isLoading, setIsLoading] = useState(false);

@@ -45,7 +45,7 @@ export default function CreateAdSpace({
     }));
   };
 
-  const publisherContract = "0x808adaa716c41f69fc99ebe11c03fe7a8a9683e1";
+  const publisherContract = "0x0b2f836957ED4028C5A1cdFAadDC1232216655f5";
   const publisherContractAbi = publisherAbi;
 
   const getAllPubClonesByPublisherAddress = async () => {
@@ -61,6 +61,7 @@ export default function CreateAdSpace({
 
   const handleSave = async () => {
     setIsLoading(true);
+    console.log("formData websiteUrl", formData.websiteUrl);
     const hash = await walletClient.writeContract({
       address: contractAddress as `0x${string}`,
       abi: someAbi,

@@ -18,7 +18,7 @@ export default function Page() {
     setIsModalOpen(true);
   };
 
-  const contractAddress = "0x1A11eC2Cc811e610eBAa8975daA0A8c1a080d2d0";
+  const contractAddress = "0xF819c667b5E6aa01F93fcb52B962D6C8B35F1826";
   const contractAbi = advertiserContractAbi;
 
   const fetchData = async () => {
